@@ -1,16 +1,7 @@
 import React , { Component } from 'react';
+import { Router, Route, Link, browserHistory } from 'react-router'
 import { render } from 'react-dom';
 
-import './app.scss';
+import routes from './Routes';
 
-class App extends Component {
-
-  render() {
-    return (
-      <p className="red">React!!!</p>
-    );
-  }
-
-}
-
-render(<App/>, document.getElementById('app'));
+render(routes, document.getElementById('app'));
