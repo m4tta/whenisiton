@@ -1,14 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 
-import Time from '../Components/Time';
+import Search from '../Components/Search';
 
 class Home extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+
     return (
-      <div>
-        <p className="red">React!!!</p>
-        <Time/>
+      <div className="container content">
+        <Search/>
       </div>
     );
   }

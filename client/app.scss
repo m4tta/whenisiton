@@ -1,0 +1,30 @@
+@import 'vars';
+@import './Containers/home';
+
+* {
+  font-family: Roboto;
+  color: white;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $base;
+  // background: url(https://image.tmdb.org/t/p/original/6yDkRqCqpGkCvX49onaqG605gct.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+*:focus {
+    outline: none;
+}
+
+.container {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.content {
+  margin-top: 150px;
+}

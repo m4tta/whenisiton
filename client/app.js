@@ -4,4 +4,6 @@ import { render } from 'react-dom';
 
 import routes from './Routes';
 
+import './app.scss'
+
 render(routes, document.getElementById('app'));
