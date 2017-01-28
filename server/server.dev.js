@@ -27,7 +27,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.use('/public', express.static(path.resolve(__dirname, '../public')))
 
 // API endpoints
-app.use('/api', require('./api/time'));
+app.use('/api', require('./api/tv'));
 
 // Catch all to send everything to the client-side to be handled.
 app.get('*', function(req, res) {

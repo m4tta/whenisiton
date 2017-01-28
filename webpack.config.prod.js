@@ -8,6 +8,7 @@ const APP_DIR = path.resolve(__dirname, 'client/');
 const config = {
   devtool: 'source-map',
   entry: [
+    'whatwg-fetch',
     path.resolve(APP_DIR, 'app.js')
   ],
   output: {
@@ -16,6 +17,7 @@ const config = {
     publicPath: '/public/'
   },
   plugins: [
+    new webpack.NoErrorsPlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
@@ -37,10 +39,6 @@ const config = {
         test: /\.jsx?$/,
         include: APP_DIR,
         loader: 'babel'
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('css!sass')
       }
     ]
   }

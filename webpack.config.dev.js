@@ -1,13 +1,19 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const validate = require('webpack-validator');
+const merge = require('webpack-merge');
+
+const baseConfig = require('./webpack.config.base');
+
 const BUILD_DIR = path.resolve(__dirname, 'public/');
 const APP_DIR = path.resolve(__dirname, 'client/');
 
-const config = {
+const config = validate(merge(baseConfig, {
   devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client',
+    'whatwg-fetch',
     path.resolve(APP_DIR, 'app.js')
   ],
   output: {
@@ -16,22 +22,19 @@ const config = {
     publicPath: '/public/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         include: APP_DIR,
-        loader: 'babel'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style!css!sass'
+        loaders: ['react-hot' ,'babel']
       }
     ]
   }
-};
+}));
 
 module.exports = config;
