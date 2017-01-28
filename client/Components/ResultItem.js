@@ -13,7 +13,10 @@ class ResultItem extends React.Component {
 
     }
     return (
-      <div className={classnames('result', {'-selected': this.props.selected})} onClick={this.handleItem.bind(this, this.props.show)} tabIndex='-1'>
+      <div
+        className={classnames('result', {'-selected': this.props.selected})}
+        onClick={this.handleItem.bind(this, this.props.show)}
+      >
         <span className="name">{this.props.show.name}</span>
         <span className="date">{this.props.show.first_air_date}</span>
       </div>

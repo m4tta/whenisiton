@@ -88,6 +88,10 @@ class Search extends React.Component {
       }
       e.preventDefault();
     }
+    else if (e.key == 'Enter') {
+      // TODO: route to show details for selected show
+      console.log(`Selected ${this.itemRefs[this.state.selected].props.show.name} ID=${this.itemRefs[this.state.selected].props.show.id}`);
+    }
   }
 
   handleChange(e) {
