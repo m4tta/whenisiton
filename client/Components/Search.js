@@ -89,8 +89,7 @@ class Search extends React.Component {
       e.preventDefault();
     }
     else if (e.key == 'Enter') {
-      // TODO: route to show details for selected show
-      console.log(`Selected ${this.itemRefs[this.state.selected].props.show.name} ID=${this.itemRefs[this.state.selected].props.show.id}`);
+      this.itemRefs[this.state.selected].props.handleItem();
     }
   }
 
@@ -112,14 +111,20 @@ class Search extends React.Component {
     }
   }
 
+  itemClicked(item) {
+    // TODO: route to show details for selected show
+    console.log(item);
+  }
+
   render() {
+    this.itemRefs = {};
     let items = this.state.queryResults.slice(0, this.state.limit).map((item, index) => {
       if (this.state.selected >= 0 && this.state.selected < this.state.limit) {
         if (index == this.state.selected) {
-          return <ResultItem selected={true} key={index} show={item} ref={(c) => {this.itemRefs[index] = c;}}/>;
+          return <ResultItem handleItem={this.itemClicked.bind(this, item)} selected={true} key={index} show={item} ref={(c) => {this.itemRefs[index] = c;}}/>;
         }
       }
-      return <ResultItem key={index} show={item} ref={(c) => {this.itemRefs[index] = c;}}/>;
+      return <ResultItem handleItem={this.itemClicked.bind(this, item)} key={index} show={item} ref={(c) => {this.itemRefs[index] = c;}}/>;
     });
 
     return (
