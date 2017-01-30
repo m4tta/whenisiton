@@ -1,5 +1,6 @@
 @import 'vars';
 @import './Containers/home';
+@import './Containers/show';
 
 * {
   font-family: Roboto;
@@ -23,8 +24,4 @@ body {
 .container {
   max-width: 1024px;
   margin: auto;
-}
-
-.content {
-  margin-top: 150px;
 }
