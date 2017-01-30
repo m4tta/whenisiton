@@ -112,8 +112,12 @@ class Search extends React.Component {
   }
 
   itemClicked(item) {
-    // TODO: route to show details for selected show
-    console.log(item);
+    this.context.router.push({
+      pathname: `/show/${item.id}`,
+      state: {
+        show: item
+      }
+    });
   }
 
   render() {
