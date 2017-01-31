@@ -53,14 +53,19 @@ class Show extends React.Component {
   render() {
     const show = this.state.show;
     const yearAired = moment(show.first_air_date).year();
+    // element placeholder variables
     let genres;
     let nextEpisode;
+    let extraDetails;
+
+    // Genre badge elements
     if (show.genres) {
       genres = show.genres.map((genre, index) => {
         return (<div key={index} className="genre">{genre.name}</div>)
       });
     }
 
+    // Next Episode element
     if (this.state.nextEpisode) {
       const date = moment(this.state.nextEpisode.air_date);
       const when = date.isSame(moment(), 'day') ? 'Today' : date.fromNow();
@@ -82,6 +87,47 @@ class Show extends React.Component {
       nextEpisode = (
         <div className="next-up -loading">
           <div className="loading-pulse"></div>
+        </div>
+      )
+    }
+
+    // Extra details
+    if (this.state.haveFullDetails) {
+      const networks = show.networks.map((network) => {
+        return network.name;
+      })
+      const runtimes = show.episode_run_time.map((runtimes) => {
+        return runtimes + 'm';
+      });
+      extraDetails = (
+        <div className="details-extra">
+          <div className="extra">
+            <div className="detail">
+              <span>Status</span>
+              <span>{show.status}</span>
+            </div>
+            <div className="detail">
+              <span>Network</span>
+              <span>{networks.join(', ')}</span>
+            </div>
+            <div className="detail">
+              <span>Runtimes</span>
+              <span>{runtimes.join(', ')}</span>
+            </div>
+            <div className="detail">
+              <span>Homepage</span>
+              <span><a href={show.homepage}>{show.homepage}</a></span>
+            </div>
+          </div>
+          <div className="cast">
+          </div>
+        </div>
+      )
+    }
+    else {
+      extraDetails = (
+        <div className="details-extra -loading">
+          <div className="loading"></div>
         </div>
       )
     }
@@ -110,9 +156,7 @@ class Show extends React.Component {
             </div>
           </div>
         </div>
-        <div className="details-extra">
-
-        </div>
+        {extraDetails}
         <div className="similar">
 
         </div>

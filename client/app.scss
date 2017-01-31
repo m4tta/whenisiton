@@ -19,6 +19,11 @@ body {
   background-size: cover;
 }
 
+a {
+  color: $green;
+  text-decoration: none;
+}
+
 *:focus {
     outline: none;
 }

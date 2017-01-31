@@ -4,7 +4,7 @@
 
 .details {
   display: flex;
-  background-color: $base-dark;
+  background-color: rgba($base-dark, .8);
 
   .poster {
     width: 342px;
@@ -89,6 +89,26 @@
         @include badge();
         margin-right: 5px;
         margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+.details-extra {
+  min-height: 240px;
+  padding: 30px;
+  display: flex;
+
+  .extra {
+    display: flex;
+    flex-direction: column;
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+
+      &:not(:last-child) {
+        padding-bottom: 16px;
       }
     }
   }
