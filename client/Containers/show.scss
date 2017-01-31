@@ -25,6 +25,16 @@
         font-weight: medium;
         font-size: 24px;
       }
+
+      .body {
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        &.-well {
+          @include sunken-well();
+        }
+      }
     }
 
     .genres {

@@ -15,10 +15,18 @@ $orange: #FF6347;
   margin: auto;
 }
 
-@mixin badge {
+@mixin badge() {
   font-size: 14px;
   padding: 6px;
   border-radius: 5px;
   background-color: $base-light;
   display: inline-block;
+}
+
+@mixin sunken-well($pad: 10px) {
+  padding: $pad;
+  background: #272B30;
+  border: 1px solid #32383E;
+  box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
 }
