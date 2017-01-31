@@ -33,9 +33,15 @@ class Show extends React.Component {
     fetch(`/api/tv/${show.id}/${show.number_of_seasons}/nextepisode`)
       .then((response) => {return response.json();})
       .then((json) => {
-        this.setState({
-          nextEpisode: json.results,
-        });
+        if (json.success) {
+          this.setState({
+            nextEpisode: json.results,
+          });
+        } else {
+          this.setState({
+            nextEpisode: false,
+          });
+        }
       });
   }
 
@@ -62,6 +68,13 @@ class Show extends React.Component {
         <div className="next-up">
           <div className="action">Next Up <span className="episode-title">"{this.state.nextEpisode.name}"</span></div>
           <div className="time">{`Airing ${when}`}</div>
+        </div>
+      )
+    }
+    else if (this.state.nextEpisode == false){
+      nextEpisode = (
+        <div className="next-up">
+          <span className="no-episode">No new episodes coming up.</span>
         </div>
       )
     }
