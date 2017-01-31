@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,800');
+// @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,700,800');
 
 $base-light: #4C545C;
 $base: #3E444C;
@@ -8,3 +9,16 @@ $base-darker: #272B30;
 $blue: #5BC0DE;
 $green: #62C462;
 $orange: #FF6347;
+
+@mixin container() {
+  max-width: 1024px;
+  margin: auto;
+}
+
+@mixin badge {
+  font-size: 14px;
+  padding: 6px;
+  border-radius: 5px;
+  background-color: $base-light;
+  display: inline-block;
+}

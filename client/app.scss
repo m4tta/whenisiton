@@ -1,9 +1,11 @@
 @import 'vars';
-@import './Containers/home';
+@import './Containers/layout';
 @import './Containers/show';
+@import './Components/search';
 
 * {
-  font-family: Roboto;
+  font-family: Roboto, Open Sans;
+  font-size: 14px;
   color: white;
   box-sizing: border-box;
 }

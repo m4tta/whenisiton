@@ -1,0 +1,49 @@
+.container.-show {
+  background-color: rgba($base-darker, .9);
+}
+
+.details {
+  display: flex;
+  background-color: $base-dark;
+
+  .poster {
+    width: 342px;
+  }
+
+  .details-content {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+
+    .show-name {
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    .overview {
+      .header {
+        font-weight: medium;
+        font-size: 24px;
+      }
+    }
+
+    .genres {
+      margin-top: auto;
+
+      .header {
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .genre {
+        @include badge();
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+
+.similar {
+  background-color: $base-dark;
+}
