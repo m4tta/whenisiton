@@ -15,9 +15,24 @@
     flex-direction: column;
     padding: 15px;
 
-    .show-name {
-      font-size: 48px;
-      font-weight: bold;
+    .show-header {
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        display: flex;
+        align-items: center;
+
+        .name {
+          font-size: 42px;
+          font-weight: bold;
+        }
+        .year {
+          font-size: 32px;
+          margin-left: 10px;
+          color: rgba(white, .5);
+        }
+      }
     }
 
     .overview {

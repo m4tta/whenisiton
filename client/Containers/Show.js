@@ -46,6 +46,7 @@ class Show extends React.Component {
 
   render() {
     const show = this.state.show;
+    const yearAired = moment(show.first_air_date).year();
     let genres;
     let nextEpisode;
     if (show.genres) {
@@ -77,7 +78,12 @@ class Show extends React.Component {
         <div className="details">
           <img src={`http://image.tmdb.org/t/p/w342${show.poster_path}`} alt={show.name} className="poster"/>
           <div className="details-content">
-            <div className="show-name">{show.name}</div>
+            <div className="show-header">
+              <div className="title">
+                <span className="name">{show.name}</span>
+                <span className="year">({yearAired})</span>
+              </div>
+            </div>
             <div className="overview">
               <div className="header">Overview</div>
               <div className="body -well">{show.overview}</div>
