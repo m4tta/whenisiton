@@ -20,7 +20,7 @@ exports.searchTV = function (req, res) {
 }
 
 exports.nextEpisode = function (req, res) {
-  // expects an show id
+  // expects an show id and current season
   tmdb.tvSeasonInfo({ id: req.params.id, season_number: req.params.season }, (err, results) => {
     if (err) return res.status(err.status).json({error: err});
     const indexOfEpisode = _.findIndex(results.episodes, function (episode) {

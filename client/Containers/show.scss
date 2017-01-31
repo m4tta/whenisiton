@@ -21,6 +21,7 @@
     }
 
     .overview {
+      margin-top: auto;
       .header {
         font-weight: medium;
         font-size: 24px;
@@ -34,6 +35,30 @@
         &.-well {
           @include sunken-well();
         }
+      }
+    }
+
+    .next-up {
+      @include sunken-well(20px);
+      margin-top: auto;
+      display: inline-table;
+
+      .action {
+        font-size: 18px;
+      }
+
+      .episode-title {
+        color: $orange;
+      }
+
+      .time {
+        font-size: 24px;
+        text-align: center;
+      }
+
+      &.-loading {
+        height: 90px;
+        width: 200px;
       }
     }
 

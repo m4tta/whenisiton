@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 class Show extends React.Component {
   constructor(props) {
@@ -18,13 +19,22 @@ class Show extends React.Component {
 
   getFullDetails(show) {
     fetch(`/api/tv/${show.id}`)
-      .then((response) => {
-        return response.json();
-      })
+      .then((response) => {return response.json();})
       .then((json) => {
         this.setState({
           show: json.results,
           haveFullDetails: true
+        });
+        this.getNextEpisode(this.state.show);
+      });
+  }
+
+  getNextEpisode(show) {
+    fetch(`/api/tv/${show.id}/${show.number_of_seasons}/nextepisode`)
+      .then((response) => {return response.json();})
+      .then((json) => {
+        this.setState({
+          nextEpisode: json.results,
         });
       });
   }
@@ -37,10 +47,29 @@ class Show extends React.Component {
   render() {
     const show = this.state.show;
     let genres;
+    let nextEpisode;
     if (show.genres) {
       genres = show.genres.map((genre, index) => {
         return (<div key={index} className="genre">{genre.name}</div>)
       });
+    }
+
+    if (this.state.nextEpisode) {
+      const date = moment(this.state.nextEpisode.air_date);
+      const when = date.isSame(moment(), 'day') ? 'Today' : date.fromNow();
+      nextEpisode = (
+        <div className="next-up">
+          <div className="action">Next Up <span className="episode-title">"{this.state.nextEpisode.name}"</span></div>
+          <div className="time">{`Airing ${when}`}</div>
+        </div>
+      )
+    }
+    else {
+      nextEpisode = (
+        <div className="next-up -loading">
+          <div className="loading-pulse"></div>
+        </div>
+      )
     }
 
     return (
@@ -53,8 +82,7 @@ class Show extends React.Component {
               <div className="header">Overview</div>
               <div className="body -well">{show.overview}</div>
             </div>
-            <div className="next-up">
-            </div>
+            {nextEpisode}
             <div className="genres">
               <div className="header">Genres</div>
               <div className="list">
