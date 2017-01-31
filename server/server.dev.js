@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -12,6 +13,8 @@ const PORT = process.env.PORT || 3000;
 const webpack = require('webpack');
 const config = require('../webpack.config.dev');
 const compiler = webpack(config);
+
+app.use(morgan('dev'));
 
 app.use(bodyParser.urlencoded({ limit: '500kb', extended: false }));
 app.use(bodyParser.json({limit: '500kb', strict: false}));
