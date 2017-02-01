@@ -60,6 +60,7 @@ class Search extends React.Component {
 
   componentDidMount() {
     this.BackgroundRotator();
+    this.query.focus();
     this.query.addEventListener('keydown', this.handleSelection.bind(this));
   }
 
