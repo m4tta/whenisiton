@@ -1,34 +1,48 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const validate = require('webpack-validator');
-const merge = require('webpack-merge');
-
-const baseConfig = require('./webpack.config.base');
-
 const BUILD_DIR = path.resolve(__dirname, 'public/');
 const APP_DIR = path.resolve(__dirname, 'client/');
 
-const config = validate(merge(baseConfig, {
+const config = {
   entry: [],
-  output: {},
+  output: {
+    path: BUILD_DIR,
+    filename: 'bundle.js',
+    publicPath: '/public/'
+  },
   plugins: [],
   module: {
-    loaders: [
+    rules: [
+      {
+        test: /\.jsx?$/,
+        include: APP_DIR,
+        loaders: ['react-hot-loader' ,'babel-loader']
+      },
       {
         test: /\.json$/,
         loader: 'json-loader'
       },
       {
-        test: /\.scss$/,
-        loader: 'style!css!sass'
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css'
+        test: /.*\.(gif|png|jpe?g|svg)$/i,
+        loaders: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            query: {
+              progressive: true,
+              optimizationLevel: 7,
+              interlaced: false,
+              pngquant: {
+                quality: '65-90',
+                speed: 4
+              }
+            }
+          }
+        ]
       }
     ]
   }
-}));
+};
 
 module.exports = config;

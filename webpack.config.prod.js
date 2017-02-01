@@ -17,8 +17,7 @@ const config = {
     publicPath: '/public/'
   },
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': "'production'"
@@ -34,11 +33,16 @@ const config = {
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        include: APP_DIR,
-        loader: 'babel'
+        test: /\.(sass|scss)$/,
+        use: [
+          ExtractTextPlugin.extract({
+            fallbackLoader: "style-loader",
+            loader: "css-loader"
+          }),
+          'sass-loader'
+      ]
       }
     ]
   }
