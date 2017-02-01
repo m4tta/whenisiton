@@ -112,6 +112,14 @@ class Show extends React.Component {
       const runtimes = show.episode_run_time.map((runtimes) => {
         return runtimes + 'm';
       });
+      const members = show.credits.cast.slice(0,9).map((member, index) => {
+        return (
+          <div className="member" key={index}>
+            <span className="character">{member.character}</span>
+            <span className="actor">{member.name}</span>
+          </div>
+        )
+      });
       extraDetails = (
         <div className="details-extra">
           <div className="extra">
@@ -133,6 +141,10 @@ class Show extends React.Component {
             </div>
           </div>
           <div className="cast">
+            <span>Cast</span>
+            <div className="cast-list">
+              {members}
+            </div>
           </div>
         </div>
       )

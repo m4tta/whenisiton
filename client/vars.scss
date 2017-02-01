@@ -67,7 +67,13 @@ $pulse-duration: 750ms;
     border-top-color: $white;
     animation: spin $spin-duration infinite linear;
 
-    &.--double {
+    &.-large {
+      width: $base-line-height * 3;
+      height: $base-line-height * 3;
+      border-width: .8rem;
+    }
+
+    &.-double {
       border-style: double;
       border-width: .5rem;
     }

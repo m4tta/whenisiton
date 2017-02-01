@@ -1,5 +1,6 @@
 .container.-show {
   background-color: rgba($base-darker, .9);
+  min-height: 400px;
 }
 
 .details {
@@ -7,7 +8,7 @@
   background-color: rgba($base-dark, .8);
 
   .poster {
-    width: 342px;
+    max-width: 342px;
   }
 
   .details-content {
@@ -98,6 +99,7 @@
   min-height: 240px;
   padding: 30px;
   display: flex;
+  justify-content: space-between;
 
   .extra {
     display: flex;
@@ -109,6 +111,28 @@
 
       &:not(:last-child) {
         padding-bottom: 16px;
+      }
+    }
+  }
+
+  .cast {
+    max-width: 645px;
+    text-align: center;
+
+    .cast-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      .member {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 0;
+        min-width: 200px;
+
+        .character {
+          font-weight: bold;
+        }
       }
     }
   }
