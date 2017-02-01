@@ -5,7 +5,7 @@ const tmdb = require('moviedb')(process.env.TMDB_KEY);
 exports.getTVById = function (req, res) {
   // TODO: check mongo cache for the show details
   // if they don't exist then do a external api call
-  tmdb.tvInfo({id: req.params.id, append_to_response: 'credits'}, function(err, results){
+  tmdb.tvInfo({id: req.params.id, append_to_response: 'credits,external_ids'}, function(err, results){
 if (err) return res.status(err.status).json({error: err, success: false});
     return res.status(200).json({
       results,

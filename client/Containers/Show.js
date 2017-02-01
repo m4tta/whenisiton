@@ -1,10 +1,12 @@
 import React from 'react';
 import moment from 'moment';
 
+// Images
+import imdbImage from '../assets/imdb.png';
+
 class Show extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this);
 
     this.state = {
       show: props.location.state ? props.location.state.show : null,
@@ -166,6 +168,11 @@ class Show extends React.Component {
               <div className="title">
                 <span className="name">{show.name}</span>
                 <span className="year">({yearAired})</span>
+              </div>
+              <div className="buttons">
+                <a href={`http://imdb.com/title/${show.external_ids.imdb_id || ''}/`}>
+                  <img src={imdbImage} alt="IMDB - The Blacklist"/>
+                </a>
               </div>
             </div>
             <div className="overview">
