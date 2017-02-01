@@ -1,3 +1,7 @@
 node_modules
 
 .env
+
+!index.dev.html
+!index.prod.html
+public

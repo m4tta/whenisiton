@@ -23,6 +23,11 @@ const config = merge(baseConfig, {
   module: {
     rules: [
       {
+        test: /\.jsx?$/,
+        include: APP_DIR,
+        use: ['react-hot-loader' ,'babel-loader']
+      },
+      {
         test: /\.(sass|scss)$/,
         use: [
           'style-loader',

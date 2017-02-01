@@ -15,21 +15,16 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        include: APP_DIR,
-        loaders: ['react-hot-loader' ,'babel-loader']
-      },
-      {
         test: /\.json$/,
-        loader: 'json-loader'
+        use: 'json-loader'
       },
       {
         test: /.*\.(gif|png|jpe?g|svg)$/i,
-        loaders: [
+        use: [
           'file-loader',
           {
             loader: 'image-webpack-loader',
-            query: {
+            options: {
               mozjpeg: {
                 progressive: true,
               },

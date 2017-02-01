@@ -2,13 +2,13 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const compression = require('compression');
 
 const app = express();
 
-// Load environment variables from '.env'
-require('dotenv').load();
+const PORT = process.env.PORT || 80;
 
-const PORT = process.env.PORT || 3000;
+app.use(compression());
 
 app.use(morgan('dev'));
 
@@ -23,9 +23,10 @@ app.use('/api', require('./api/tv'));
 
 // Catch all to send everything to the client-side to be handled.
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../public/index.dev.html'));
+  res.sendFile(path.resolve(__dirname, '../public/index.prod.html'));
 });
 
 app.listen(PORT, function () {
+  console.log('[Production Mode]');
   console.log(`Express app listening on port ${PORT}!`);
 });

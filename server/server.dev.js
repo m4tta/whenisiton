@@ -5,9 +5,6 @@ const morgan = require('morgan');
 
 const app = express();
 
-// Load environment variables from '.env'
-require('dotenv').load();
-
 const PORT = process.env.PORT || 3000;
 
 const webpack = require('webpack');
@@ -38,5 +35,6 @@ app.get('*', function(req, res) {
 });
 
 app.listen(PORT, function () {
+  console.log('[Development Mode]');
   console.log(`Express app listening on port ${PORT}!`);
 });
