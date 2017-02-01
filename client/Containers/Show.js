@@ -5,20 +5,24 @@ class Show extends React.Component {
   constructor(props) {
     super(props);
     console.log(this);
+
     this.state = {
-      show: props.location.state.show,
+      show: props.location.state ? props.location.state.show : null,
       haveFullDetails: false
     }
 
-    this.getFullDetails(this.state.show);
+    const showID = this.state.show ? this.state.show.id : props.params.id;
+    this.getFullDetails(showID);
   }
 
-  componentDidMount() {
-    this.setBackground(this.state.show);
+  componentWillUpdate(nextProps, nextState) {
+    if (nextState.show) {
+      this.setBackground(nextState.show);
+    }
   }
 
-  getFullDetails(show) {
-    fetch(`/api/tv/${show.id}`)
+  getFullDetails(showId) {
+    fetch(`/api/tv/${showId}`)
       .then((response) => {return response.json();})
       .then((json) => {
         this.setState({
@@ -52,6 +56,15 @@ class Show extends React.Component {
 
   render() {
     const show = this.state.show;
+
+    if (!show) {
+      return (
+        <div className="container -show -loading">
+          <div className="loading -large"></div>
+        </div>
+      )
+    }
+
     const yearAired = moment(show.first_air_date).year();
     // element placeholder variables
     let genres;
