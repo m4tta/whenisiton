@@ -1,3 +1,12 @@
+// Font Awesome
+$fa-font-path: "~font-awesome/fonts";
+
+@import "~font-awesome/scss/font-awesome";
+
+.fa-lg {
+  font-size: 1.7em;
+}
+
 @import 'vars';
 @import './Containers/layout';
 @import './Containers/show';
@@ -22,6 +31,10 @@ body {
 a {
   color: $green;
   text-decoration: none;
+
+  & > .fa {
+    color: white;
+  }
 }
 
 *:focus {
