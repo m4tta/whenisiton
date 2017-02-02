@@ -33,6 +33,13 @@
       display: flex;
       flex-direction: column;
 
+      .buttons {
+        .fa:hover {
+          color: $orange;
+          transition: .20s
+        }
+      }
+
       .title {
         display: flex;
         align-items: center;
@@ -174,6 +181,17 @@
 
         .character {
           font-weight: bold;
+        }
+
+        .actor .social {
+          margin-top: 3px;
+          .fa {
+            margin: 0 4px;
+          }
+          .fa:hover {
+            color: $orange;
+            transition: .20s;
+          }
         }
       }
     }

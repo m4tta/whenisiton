@@ -1,6 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
+const tmdb = require('moviedb')('17c5a1d1fe283613b578056b9ee0b521');
+
 // Images
 import imdbImage from '../assets/imdb.png';
 
@@ -35,6 +37,7 @@ class Show extends React.Component {
           haveFullDetails: true
         });
         this.getNextEpisode(this.state.show);
+        this.getCastExternals();
       });
   }
 
@@ -52,6 +55,17 @@ class Show extends React.Component {
           });
         }
       });
+  }
+
+  getCastExternals() {
+    const show = this.state.show;
+    for (let i = 0; i < show.credits.cast.length; i++) {
+      show.credits.cast[i]
+      tmdb.personExternalIds({id: show.credits.cast[i].id}, (err, res) => {
+        show.credits.cast[i] = {...show.credits.cast[i], ...res};
+        this.setState({show});
+      });
+    }
   }
 
   setBackground(show) {
@@ -119,10 +133,29 @@ class Show extends React.Component {
         return runtimes + 'm';
       });
       const members = show.credits.cast.slice(0,9).map((member, index) => {
+        const twitter = member.twitter_id ? (
+            <a href={`http://twitter.com/${member.twitter_id}/`}>
+              <i className="fa fa-twitter-square fa-lg grow" aria-hidden="true" />
+            </a>
+          ) : '';
+        const instagram = member.instagram_id ? (
+            <a href={`http://instagram.com/${member.instagram_id}/`}>
+              <i className="fa fa-instagram fa-lg grow" aria-hidden="true" />
+            </a>
+          ) : '';
         return (
           <div className="member" key={index}>
             <span className="character">{member.character}</span>
-            <span className="actor">{member.name}</span>
+            <div className="actor">
+              <a href={`http://www.imdb.com/name/${member.imdb_id}/`}>{member.name}</a>
+              <div className="social">
+                <a href={`http://www.imdb.com/name/${member.imdb_id}/`}>
+                  <i className="fa fa-imdb fa-lg grow" aria-hidden="true" />
+                </a>
+                {twitter}
+                {instagram}
+              </div>
+            </div>
           </div>
         )
       });
@@ -175,7 +208,7 @@ class Show extends React.Component {
               </div>
               <div className="buttons">
                 <a href={imdbLink}>
-                  <img src={imdbImage} alt="IMDB - The Blacklist"/>
+                  <i className="fa fa-imdb fa-3x" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
