@@ -15,6 +15,9 @@ class Show extends React.Component {
 
     const showID = this.state.show ? this.state.show.id : props.params.id;
     this.getFullDetails(showID);
+    if (this.state.show) {
+      this.setBackground(this.state.show);
+    }
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -68,6 +71,7 @@ class Show extends React.Component {
     }
 
     const yearAired = moment(show.first_air_date).year();
+    const imdbLink = show.external_ids ? `http://imdb.com/title/${show.external_ids.imdb_id}/` : '#';
     // element placeholder variables
     let genres;
     let nextEpisode;
@@ -170,7 +174,7 @@ class Show extends React.Component {
                 <span className="year">({yearAired})</span>
               </div>
               <div className="buttons">
-                <a href={`http://imdb.com/title/${show.external_ids.imdb_id || ''}/`}>
+                <a href={imdbLink}>
                   <img src={imdbImage} alt="IMDB - The Blacklist"/>
                 </a>
               </div>
