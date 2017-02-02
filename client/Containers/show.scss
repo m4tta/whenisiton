@@ -7,8 +7,21 @@
   display: flex;
   background-color: rgba($base-dark, .8);
 
+  @media #{$mobile} {
+    flex-direction: column;
+  }
+
   .poster {
     max-width: 342px;
+    max-height: 513px;
+
+    @media #{$mobile} {
+      max-width: calc(342px / 2);
+      max-height: calc(513px / 2);
+      width: auto;
+      height: auto;
+      margin: auto;
+    }
   }
 
   .details-content {
@@ -32,6 +45,18 @@
           font-size: 32px;
           margin-left: 10px;
           color: rgba(white, .5);
+        }
+
+        @media #{$mobile} {
+          .name {
+            font-size: 24px;
+            font-weight: bold;
+          }
+          .year {
+            font-size: 26px;
+            margin-left: 10px;
+            color: rgba(white, .5);
+          }
         }
       }
     }
@@ -58,6 +83,10 @@
       @include sunken-well(20px);
       margin-top: auto;
       display: inline-table;
+
+      @media #{$mobile} {
+        margin: 10px auto;
+      }
 
       .action {
         font-size: 18px;
@@ -101,6 +130,14 @@
   display: flex;
   justify-content: space-between;
 
+  @media #{$mobile} {
+    flex-direction: column;
+
+    .extra {
+      margin-bottom: 10px;
+    }
+  }
+
   .extra {
     display: flex;
     flex-direction: column;
@@ -119,9 +156,14 @@
     max-width: 645px;
     text-align: center;
 
+    .cast-header {
+      font-size: 22px;
+    }
+
     .cast-list {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
 
       .member {
         display: flex;

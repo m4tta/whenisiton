@@ -1,7 +1,9 @@
 .search {
-  max-width: 624px;
-  margin: auto;
-  margin-top: 150px;
+  @media #{$desktop} {
+    max-width: 624px;
+    margin: auto;
+    margin-top: 30vh;
+  }
 
   input {
     background-color: rgba($base-dark, .9);
@@ -13,6 +15,11 @@
     text-align: center;
     height: 72px;
     width: 100%;
+
+    @media #{$mobile} {
+      font-size: 28px;
+      height: 62px;
+    }
 
     &:focus {
       border-color: $blue;
@@ -31,8 +38,14 @@
     border-bottom: none;
     height: 42px;
     display: flex;
+    justify-content: space-between;
     padding: 10px 20px;
     cursor: pointer;
+
+    span {
+      // vertically center these damn spans
+      margin: auto 0;
+    }
 
     &:hover, &:focus, &.-selected {
       border: 1px solid $blue !important;
@@ -47,7 +60,9 @@
     }
 
     .name {
-      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .date {

@@ -10,9 +10,18 @@ $blue: #5BC0DE;
 $green: #62C462;
 $orange: #FF6347;
 
+// Media query breakpoints
+$mobile: "only screen and (max-width: 730px)";
+$desktop: "only screen and (min-width: 730px)";
+
 @mixin container() {
   max-width: 1024px;
   margin: auto;
+
+  @media #{$mobile} {
+    max-width: 100%;
+    margin: 0;
+  }
 }
 
 @mixin badge() {
