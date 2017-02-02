@@ -132,6 +132,9 @@ class Show extends React.Component {
       const runtimes = show.episode_run_time.map((runtimes) => {
         return runtimes + 'm';
       });
+      const creators = show.created_by.map((creator) => {
+        return creator.name;
+      });
       const members = show.credits.cast.slice(0,9).map((member, index) => {
         const twitter = member.twitter_id ? (
             <a href={`http://twitter.com/${member.twitter_id}/`}>
@@ -169,6 +172,10 @@ class Show extends React.Component {
             <div className="detail">
               <span>Network</span>
               <span>{networks.join(', ')}</span>
+            </div>
+            <div className="detail">
+              <span>Creators</span>
+              <span>{creators.join(', ')}</span>
             </div>
             <div className="detail">
               <span>Runtimes</span>
