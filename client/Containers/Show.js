@@ -147,7 +147,7 @@ class Show extends React.Component {
             </div>
           </div>
           <div className="cast">
-            <span>Cast</span>
+            <div className="cast-header">Cast</div>
             <div className="cast-list">
               {members}
             </div>
