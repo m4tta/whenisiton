@@ -3,6 +3,8 @@ import moment from 'moment';
 
 const tmdb = require('moviedb')('17c5a1d1fe283613b578056b9ee0b521');
 
+import Footer from '../Components/Footer';
+
 // Images
 import imdbImage from '../assets/imdb.png';
 
@@ -231,6 +233,7 @@ class Show extends React.Component {
         <div className="similar">
 
         </div>
+        <Footer />
       </div>
     );
   }

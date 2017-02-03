@@ -11,6 +11,19 @@
 }
 
 .footer {
-  @include container(10px);
-  text-align: center;
+  @include container(10px, 10px);
+  display: flex;
+  justify-content: center;
+  background-color: $base-darker;
+  padding: 5px 10px;
+
+  .attribute {
+    display: flex;
+    align-items: center;
+
+    .logo {
+      width: 30px;
+      margin-left: 5px;
+    }
+  }
 }
