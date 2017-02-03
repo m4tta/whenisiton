@@ -14,9 +14,9 @@ $orange: #FF6347;
 $mobile: "only screen and (max-width: 730px)";
 $desktop: "only screen and (min-width: 730px)";
 
-@mixin container() {
+@mixin container($top: 0px, $bottom: 0px) {
   max-width: 1024px;
-  margin: auto;
+  margin: $top auto $bottom auto;
 
   @media #{$mobile} {
     max-width: 100%;
