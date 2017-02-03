@@ -1,6 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux'
 import _ from 'lodash';
+
+import * as ClientActions from '../../Actions/client';
+import * as ShowActions from '../../Actions/show';
 
 const tmdb = require('moviedb')('17c5a1d1fe283613b578056b9ee0b521');
 
@@ -54,7 +60,7 @@ class Search extends React.Component {
 
     const index = _.random(backgrounds.length-1);
 
-    document.body.style.backgroundImage = `url(${backgrounds[index].image})`;
+    this.props.setBackground(backgrounds[index].image);
     this.setState({placeholderText: backgrounds[index].name})
   }
 
@@ -112,13 +118,10 @@ class Search extends React.Component {
     }
   }
 
-  itemClicked(item) {
-    this.context.router.push({
-      pathname: `/show/${item.id}`,
-      state: {
-        show: item
-      }
-    });
+  itemClicked(show) {
+    this.props.setPartialShowDetails(show);
+    this.props.setBackground(`https://image.tmdb.org/t/p/w1920${show.backdrop_path}`);
+    this.props.dispatch(push(`/show/${show.id}`))
   }
 
   render() {
@@ -155,4 +158,17 @@ Search.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default Search;
+function mapStateToProps(state) {
+  return {
+    // show: state.show
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ...bindActionCreators({...ClientActions, ...ShowActions}, dispatch),
+    dispatch
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

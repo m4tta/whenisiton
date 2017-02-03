@@ -5,10 +5,10 @@ import { routerMiddleware, push } from 'react-router-redux';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers';
 
-// import * as counterActions from '../actions/counter';
+import * as counterActions from '../Actions/show';
 
 const actionCreators = {
-  // ...counterActions,
+  ...counterActions,
   push,
 };
 
@@ -37,7 +37,7 @@ export default function configureStore(initialState) {
 
   if (module.hot) {
     module.hot.accept('../reducers', () =>
-      store.replaceReducer(require('../reducers')) // eslint-disable-line global-require
+      store.replaceReducer(require('../reducers').default) // eslint-disable-line global-require
     );
   }
 

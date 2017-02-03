@@ -1,8 +1,6 @@
 import React from 'react';
 import moment from 'moment';
 
-const tmdb = require('moviedb')('17c5a1d1fe283613b578056b9ee0b521');
-
 import ExtraDetails from './ExtraDetails';
 
 // Images
@@ -16,20 +14,19 @@ class ShowDetails extends React.Component {
       nextEpisode: false
     }
 
-    if (this.props.show) {
-      if (this.props.show._fullDetails) {
-        this.getNextEpisode(this.props.show);
-      }
+    if (this.props.show.fullDetails) {
+      this.getNextEpisode(this.props.show.details);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.show._fullDetails) {
-      this.getNextEpisode(nextProps.show);
+    if (nextProps.show.fullDetails) {
+      this.getNextEpisode(nextProps.show.details);
     }
   }
 
   getNextEpisode(show) {
+    // TODO: Move this to an action and reducer
     fetch(`/api/tv/${show.id}/${show.number_of_seasons}/nextepisode`)
       .then((response) => {return response.json();})
       .then((json) => {
@@ -46,7 +43,7 @@ class ShowDetails extends React.Component {
   }
 
   render() {
-    const show = this.props.show;
+    const show = this.props.show.details;
 
     if (!show) {
       return (

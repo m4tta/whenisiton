@@ -2,21 +2,10 @@ import React from 'react';
 
 class ExtraDetails extends React.Component {
 
-  getCastExternals() {
-    const show = this.state.show;
-    for (let i = 0; i < show.credits.cast.length; i++) {
-      show.credits.cast[i]
-      tmdb.personExternalIds({id: show.credits.cast[i].id}, (err, res) => {
-        show.credits.cast[i] = {...show.credits.cast[i], ...res};
-        this.setState({show});
-      });
-    }
-  }
-
   render() {
-    const show = this.props.show;
+    const show = this.props.show.details;
 
-    if (!show || !show._fullDetails) {
+    if (!show || !this.props.show.fullDetails) {
       return (
         <div className="details-extra -loading">
           <div className="loading"></div>
