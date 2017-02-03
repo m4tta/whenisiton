@@ -9,17 +9,19 @@ export default function show(state = {_fullDetails: false}, action) {
       }
 
       break;
-
     case 'CAST_MEMBER_EXTERNALS':
       const newState = {...state};
       const i = _.findIndex(newState.details.credits.cast, (member) => {
         return member.id == action.externals.id;
       });
-
+      // TODO: explore what is going on with externals
+      // first state update shows all externals populated
       newState.details.credits.cast[i] = {...newState.details.credits.cast[i], ...action.externals};
 
       return newState;
-
+      break;
+    case 'NEXT_EPISODE':
+      return {...state, nextEpisode: action.episode, hasNextEpisode: action.hasNextEpisode};
       break;
     default:
       return state;

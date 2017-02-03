@@ -7,40 +7,6 @@ import ExtraDetails from './ExtraDetails';
 import imdbImage from '../../assets/imdb.png';
 
 class ShowDetails extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      nextEpisode: false
-    }
-
-    if (this.props.show.fullDetails) {
-      this.getNextEpisode(this.props.show.details);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.show.fullDetails) {
-      this.getNextEpisode(nextProps.show.details);
-    }
-  }
-
-  getNextEpisode(show) {
-    // TODO: Move this to an action and reducer
-    fetch(`/api/tv/${show.id}/${show.number_of_seasons}/nextepisode`)
-      .then((response) => {return response.json();})
-      .then((json) => {
-        if (json.success) {
-          this.setState({
-            nextEpisode: json.results,
-          });
-        } else {
-          this.setState({
-            nextEpisode: false,
-          });
-        }
-      });
-  }
 
   render() {
     const show = this.props.show.details;
@@ -68,17 +34,17 @@ class ShowDetails extends React.Component {
     }
 
     // Next Episode element
-    if (this.state.nextEpisode) {
-      const date = moment(this.state.nextEpisode.air_date);
+    if (this.props.show.hasNextEpisode) {
+      const date = moment(this.props.show.nextEpisode.air_date);
       const when = date.isSame(moment(), 'day') ? 'Today' : date.fromNow();
       nextEpisode = (
         <div className="next-up">
-          <div className="action">Next Up <span className="episode-title">"{this.state.nextEpisode.name}"</span></div>
+          <div className="action">Next Up <span className="episode-title">"{this.props.show.nextEpisode.name}"</span></div>
           <div className="time">{`Airing ${when}`}</div>
         </div>
       )
     }
-    else if (this.state.nextEpisode == false){
+    else if (this.props.show.hasNextEpisode == false){
       nextEpisode = (
         <div className="next-up">
           <span className="no-episode">No new episodes coming up.</span>
