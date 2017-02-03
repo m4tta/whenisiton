@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import Search from '../Components/Search';
+import Search from '../Components/Search/Search';
 
 class Home extends Component {
 
