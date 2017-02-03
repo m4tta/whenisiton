@@ -22,12 +22,6 @@ class Show extends React.Component {
     }
   }
 
-  componentWillUpdate(nextProps, nextState) {
-    if (nextState.show) {
-      this.setBackground(nextState.show);
-    }
-  }
-
   getFullDetails(showId) {
     fetch(`/api/tv/${showId}`)
       .then((response) => {return response.json();})
@@ -36,6 +30,7 @@ class Show extends React.Component {
           show: json.results,
           haveFullDetails: true
         });
+        this.setBackground(this.state.show);
         this.getNextEpisode(this.state.show);
         this.getCastExternals();
       });
