@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Cast from './Cast';
+
 class ExtraDetails extends React.Component {
 
   render() {
@@ -22,33 +24,7 @@ class ExtraDetails extends React.Component {
     const creators = show.created_by.map((creator) => {
       return creator.name;
     });
-    const members = show.credits.cast.slice(0,9).map((member, index) => {
-      const twitter = member.twitter_id ? (
-          <a href={`http://twitter.com/${member.twitter_id}/`}>
-            <i className="fa fa-twitter-square fa-lg grow" aria-hidden="true" />
-          </a>
-        ) : '';
-      const instagram = member.instagram_id ? (
-          <a href={`http://instagram.com/${member.instagram_id}/`}>
-            <i className="fa fa-instagram fa-lg grow" aria-hidden="true" />
-          </a>
-        ) : '';
-      return (
-        <div className="member" key={index}>
-          <span className="character">{member.character}</span>
-          <div className="actor">
-            <a href={`http://www.imdb.com/name/${member.imdb_id}/`}>{member.name}</a>
-            <div className="social">
-              <a href={`http://www.imdb.com/name/${member.imdb_id}/`}>
-                <i className="fa fa-imdb fa-lg grow" aria-hidden="true" />
-              </a>
-              {twitter}
-              {instagram}
-            </div>
-          </div>
-        </div>
-      )
-    });
+
     return (
       <div className="details-extra">
         <div className="extra">
@@ -73,12 +49,7 @@ class ExtraDetails extends React.Component {
             <span><a href={show.homepage}>{show.homepage}</a></span>
           </div>
         </div>
-        <div className="cast">
-          <div className="cast-header">Cast</div>
-          <div className="cast-list">
-            {members}
-          </div>
-        </div>
+        <Cast cast={show.credits.cast}/>
       </div>
     )
   }
