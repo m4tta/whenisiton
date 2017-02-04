@@ -4,3 +4,10 @@ export function setBackground(url) {
     backgroundUrl: url,
   }
 }
+
+export function setPageTitle(title) {
+  return {
+    type: 'SET_PAGETITLE',
+    title: title,
+  }
+}

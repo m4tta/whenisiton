@@ -9,6 +9,7 @@ export function getShowDetails(showId) {
       .then((json) => {
         dispatch(setShowDetails(json.results));
         dispatch(ClientActions.setBackground(`https://image.tmdb.org/t/p/w1920${json.results.backdrop_path}`));
+        dispatch(ClientActions.setPageTitle(`When is it on? - ${json.results.name}`));
         dispatch(getCastExternals());
         dispatch(getNextEpisode());
       });
