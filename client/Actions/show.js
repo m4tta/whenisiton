@@ -1,4 +1,5 @@
 import * as ClientActions from './client';
+import * as SearchActions from './search';
 
 const tmdb = require('moviedb')('17c5a1d1fe283613b578056b9ee0b521');
 
@@ -42,7 +43,6 @@ export function getNextEpisode() {
       });
   }
 }
-
 
 export function setNextEpisode(episode) {
   return {

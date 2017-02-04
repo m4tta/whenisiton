@@ -3,6 +3,7 @@ import _ from 'lodash';
 export default function show(state = {_fullDetails: false}, action) {
   switch (action.type) {
     case 'SHOW_DETAILS':
+      // getting SHOW_DETAILS should ignore previous state and create new object
       return {
         details: action.show,
         fullDetails: action.fullDetails,
