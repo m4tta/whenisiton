@@ -59,10 +59,15 @@ class ShowDetails extends React.Component {
       )
     }
 
+    let poster;
+    if (show.poster_path) {
+      poster = <img src={`http://image.tmdb.org/t/p/w342${show.poster_path}`} alt={show.name} className="poster"/>;
+    }
+
     return (
       <div className="container -show">
         <div className="details">
-          <img src={`http://image.tmdb.org/t/p/w342${show.poster_path}`} alt={show.name} className="poster"/>
+          {poster}
           <div className="details-content">
             <div className="show-header">
               <div className="title">
