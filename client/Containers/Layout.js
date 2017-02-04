@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class Layout extends Component {
 
   render() {
-    document.body.style.backgroundImage = `url(${this.props.backgroundUrl})`;
+    document.body.style.backgroundImage = this.props.backgroundUrl ? `url(${this.props.backgroundUrl})` : '';
     document.title = this.props.pageTitle || 'When Is It On?';
     return (
       <div>
