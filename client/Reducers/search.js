@@ -1,5 +1,6 @@
 const initialState = {
   results: [],
+  query: '',
   selected: -1
 };
 
