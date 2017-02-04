@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class Layout extends Component {
 
   render() {
+    document.body.style.backgroundImage = this.props.backgroundUrl ? `url(${this.props.backgroundUrl})` : '';
+    document.title = this.props.pageTitle || 'When Is It On?';
     return (
       <div>
         <div className="nav">
@@ -16,4 +19,11 @@ class Layout extends Component {
 
 }
 
-export default Layout;
+function mapStateToProps(state) {
+  return {
+    backgroundUrl: state.client.backgroundUrl,
+    pageTitle: state.client.pageTitle,
+  };
+}
+
+export default connect(mapStateToProps)(Layout);

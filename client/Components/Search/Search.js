@@ -1,23 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'react-router-redux'
 import _ from 'lodash';
+
+import * as ClientActions from '../../Actions/client';
+import * as ShowActions from '../../Actions/show';
+import * as SearchActions from '../../Actions/search';
 
 const tmdb = require('moviedb')('17c5a1d1fe283613b578056b9ee0b521');
 
-import ResultItem from './ResultItem'
+import ResultList from './ResultList';
 
 class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.itemRefs = {};
+
     this.state = {
       limit: this.props.limit || 8,
-      queryResults: [],
-      queryText: '',
       placeholderText: '',
-      selected: -1
     }
+
+    props.emptyResults();
   }
 
   BackgroundRotator() {
@@ -54,7 +60,7 @@ class Search extends React.Component {
 
     const index = _.random(backgrounds.length-1);
 
-    document.body.style.backgroundImage = `url(${backgrounds[index].image})`;
+    this.props.setBackground(backgrounds[index].image);
     this.setState({placeholderText: backgrounds[index].name})
   }
 
@@ -70,67 +76,39 @@ class Search extends React.Component {
 
   handleSelection(e) {
     if (e.key == 'ArrowUp') {
-      const selected = this.state.selected-1;
+      const selected = this.props.selectedResult-1;
       if (selected >= 0) {
-        this.setState({
-          selected: this.state.selected > -1 ? selected : 0,
-          queryText: this.itemRefs[selected].props.show.name
-        });
+        this.props.setSelectedResult(this.props.selectedResult > -1 ? selected : 0)
+        // this.props.setQueryText(this.props.results[selected].name);
       }
       e.preventDefault();
     }
     else if (e.key == 'ArrowDown') {
-      const selected = this.state.selected+1;
-      if (selected < _.size(this.itemRefs)) {
-        this.setState({
-          selected: selected,
-          queryText: this.itemRefs[selected].props.show.name
-        });
+      const selected = this.props.selectedResult+1;
+      if (selected < this.state.limit) {
+        this.props.setSelectedResult(selected);
+        // this.props.setQueryText(this.props.results[selected].name);
       }
       e.preventDefault();
     }
     else if (e.key == 'Enter') {
-      this.itemRefs[this.state.selected].props.handleItem();
+      const show = this.props.results[this.props.selectedResult];
+      this.props.setPartialShowDetails(show);
+      this.props.setBackground(`https://image.tmdb.org/t/p/w1920${show.backdrop_path}`);
+      this.props.dispatch(push(`/show/${show.id}`))
     }
   }
 
   handleChange(e) {
-    this.setState({queryText: e.target.value})
+    this.props.setQueryText(e.target.value);
     if (this.query.value.length >= 3) {
-      tmdb.searchTv({ query: this.query.value }, (err, res) => {
-        if (err) this.setState({queryResults: []});
-        this.setState({
-          queryResults: res.results,
-          selected: -1
-        });
-      });
+      this.props.searchTV(this.query.value);
     } else {
-      this.setState({
-        queryResults: [],
-        selected: -1
-      });
+      this.props.emptyResults();
     }
   }
 
-  itemClicked(item) {
-    this.context.router.push({
-      pathname: `/show/${item.id}`,
-      state: {
-        show: item
-      }
-    });
-  }
-
   render() {
-    this.itemRefs = {};
-    let items = this.state.queryResults.slice(0, this.state.limit).map((item, index) => {
-      if (this.state.selected >= 0 && this.state.selected < this.state.limit) {
-        if (index == this.state.selected) {
-          return <ResultItem handleItem={this.itemClicked.bind(this, item)} selected={true} key={index} show={item} ref={(c) => {this.itemRefs[index] = c;}}/>;
-        }
-      }
-      return <ResultItem handleItem={this.itemClicked.bind(this, item)} key={index} show={item} ref={(c) => {this.itemRefs[index] = c;}}/>;
-    });
 
     return (
       <div className="search">
@@ -139,12 +117,10 @@ class Search extends React.Component {
           autoComplete="off"
           ref={(c) => {this.query = c;}}
           placeholder={this.state.placeholderText}
-          value={this.state.queryText}
+          value={this.props.queryText}
           onChange={this.handleChange.bind(this)}
         />
-        <div className="results-list">
-          {items}
-        </div>
+        <ResultList limit={this.state.limit} selected={this.props.selectedResult} results={this.props.results} />
       </div>
     );
   }
@@ -155,4 +131,19 @@ Search.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default Search;
+function mapStateToProps(state) {
+  return {
+    results: state.search.results,
+    selectedResult: state.search.selected,
+    queryText: state.search.query,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    ...bindActionCreators({...ClientActions, ...ShowActions, ...SearchActions}, dispatch),
+    dispatch
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

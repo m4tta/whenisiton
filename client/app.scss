@@ -10,7 +10,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import 'vars';
 @import './Containers/layout';
 @import './Containers/show';
-@import './Components/search';
+@import './Components/Search/search';
 
 * {
   font-family: Roboto, Open Sans;
