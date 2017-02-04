@@ -5,7 +5,6 @@ const merge = require('webpack-merge');
 
 const baseConfig = require('./webpack.config.base');
 
-const BUILD_DIR = path.resolve(__dirname, 'public/');
 const APP_DIR = path.resolve(__dirname, 'client/');
 
 const config = merge(baseConfig, {

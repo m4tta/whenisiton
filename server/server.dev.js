@@ -31,7 +31,7 @@ app.use('/api', require('./api/tv'));
 
 // Catch all to send everything to the client-side to be handled.
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../public/index.dev.html'));
+  res.sendFile(path.resolve(__dirname, './views/index.dev.html'));
 });
 
 app.listen(PORT, function () {

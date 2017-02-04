@@ -17,13 +17,14 @@ app.use(bodyParser.json({limit: '500kb', strict: false}));
 
 // Static files
 app.use('/public', express.static(path.resolve(__dirname, '../public')))
+app.use('/build', express.static(path.resolve(__dirname, '../build')))
 
 // API endpoints
 app.use('/api', require('./api/tv'));
 
 // Catch all to send everything to the client-side to be handled.
 app.get('*', function(req, res) {
-  res.sendFile(path.resolve(__dirname, '../public/index.prod.html'));
+  res.sendFile(path.resolve(__dirname, './views/index.prod.html'));
 });
 
 app.listen(PORT, function () {

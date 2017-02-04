@@ -7,7 +7,6 @@ const merge = require('webpack-merge');
 
 const baseConfig = require('./webpack.config.base');
 
-const BUILD_DIR = path.resolve(__dirname, 'public/');
 const APP_DIR = path.resolve(__dirname, 'client/');
 
 const config = merge(baseConfig, {
@@ -15,11 +14,7 @@ const config = merge(baseConfig, {
     'whatwg-fetch',
     path.resolve(APP_DIR, 'app.js')
   ],
-  output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js',
-    publicPath: '/public/'
-  },
+  output: {},
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -54,8 +49,8 @@ const config = merge(baseConfig, {
       {
         test: /\.(sass|scss)$/,
         use: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: ['css-loader', 'sass-loader']
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader']
         })
       }
     ]

@@ -1,15 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const BUILD_DIR = path.resolve(__dirname, 'public/');
-const APP_DIR = path.resolve(__dirname, 'client/');
+const BUILD_DIR = path.resolve(__dirname, 'build/');
 
 const config = {
   entry: [],
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js',
-    publicPath: '/public/'
+    publicPath: '/build/'
   },
   plugins: [],
   module: {
