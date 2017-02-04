@@ -11,8 +11,8 @@ $green: #62C462;
 $orange: #FF6347;
 
 // Media query breakpoints
-$mobile: "only screen and (max-width: 730px)";
-$desktop: "only screen and (min-width: 730px)";
+$mobile: "only screen and (max-width: 700px)";
+$desktop: "only screen and (min-width: 700px)";
 
 @mixin container($top: 0px, $bottom: 0px) {
   max-width: 1024px;
@@ -20,7 +20,7 @@ $desktop: "only screen and (min-width: 730px)";
 
   @media #{$mobile} {
     max-width: 100%;
-    margin: 0;
+    margin: $top 0 $bottom 0;
   }
 }
 

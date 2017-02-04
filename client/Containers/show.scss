@@ -12,14 +12,12 @@
   }
 
   .poster {
-    max-width: 342px;
-    max-height: 513px;
+    width: 342px;
+    height: 100%;
 
     @media #{$mobile} {
-      max-width: calc(342px / 2);
-      max-height: calc(513px / 2);
-      width: auto;
-      height: auto;
+      width: 50%;
+      height: 50%;
       margin: auto;
     }
   }
