@@ -8,6 +8,8 @@ const app = express();
 
 const PORT = process.env.PORT || 80;
 
+app.disable('x-powered-by');
+
 app.use(compression());
 
 app.use(morgan('dev'));
