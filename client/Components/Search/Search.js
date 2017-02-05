@@ -24,6 +24,7 @@ class Search extends React.Component {
     }
 
     props.emptyResults();
+    props.setQueryText('');
   }
 
   BackgroundRotator() {
