@@ -1,5 +1,5 @@
 import React from 'react';
-import { IndexRoute, Route } from 'react-router';
+import { IndexRoute, Route, Redirect } from 'react-router';
 
 import Layout from './Containers/Layout';
 import NotFound from './Containers/NotFound';
@@ -10,6 +10,6 @@ export default (
   <Route path="/" component={Layout}>
     <IndexRoute component={Home}/>
     <Route path="/show/:id" component={Show}/>
-    <Route path="*" component={NotFound}/>
+    <Redirect from="*" to="/"/>
   </Route>
 );
